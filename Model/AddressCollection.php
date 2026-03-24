@@ -25,12 +25,15 @@ final class AddressCollection implements Collection
      */
     private $locations;
 
+    private bool $fromCache;
+
     /**
      * @param Location[] $locations
      */
-    public function __construct(array $locations = [])
+    public function __construct(array $locations = [], bool $fromCache = false)
     {
         $this->locations = array_values($locations);
+        $this->fromCache = $fromCache;
     }
 
     /**
@@ -103,5 +106,17 @@ final class AddressCollection implements Collection
     public function all(): array
     {
         return $this->locations;
+    }
+
+    public function isFromCache(): bool
+    {
+        return $this->fromCache;
+    }
+
+    public function setFromCache(bool $fromCache): self
+    {
+        $this->fromCache = $fromCache;
+
+        return $this;
     }
 }
